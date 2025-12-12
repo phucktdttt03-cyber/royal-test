@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { VocabularyWord } from '../types';
 
 interface Props {
@@ -8,21 +8,39 @@ interface Props {
 }
 
 const VocabularyViewer: React.FC<Props> = ({ words, topic, onBack }) => {
+  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
+
+  // Load voices reliably
+  useEffect(() => {
+    const updateVoices = () => {
+      const vs = window.speechSynthesis.getVoices();
+      setVoices(vs);
+    };
+
+    window.speechSynthesis.onvoiceschanged = updateVoices;
+    updateVoices();
+
+    return () => {
+      window.speechSynthesis.onvoiceschanged = null;
+    };
+  }, []);
+
   // Use browser speech synthesis with child-like settings
   const speak = (text: string) => {
-    // Cancel any current speech
     window.speechSynthesis.cancel();
 
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'en-US';
     
     // Simulate child voice settings
-    utterance.pitch = 1.5; // Higher pitch sounds younger
-    utterance.rate = 0.9;  // Slightly slower for clarity
+    utterance.pitch = 1.3; // Higher pitch sounds younger
+    utterance.rate = 0.85;  // Slower for clarity
     
-    // Try to find a voice that handles pitch shifting well (usually female voices sound better pitched up)
-    const voices = window.speechSynthesis.getVoices();
-    const preferredVoice = voices.find(v => v.lang.includes('en') && (v.name.includes('Female') || v.name.includes('Samantha') || v.name.includes('Google US English')));
+    // Try to find a voice that handles pitch shifting well
+    const preferredVoice = voices.find(v => 
+      v.lang.includes('en') && 
+      (v.name.includes('Samantha') || v.name.includes('Google US English') || v.name.includes('Female'))
+    );
     
     if (preferredVoice) {
       utterance.voice = preferredVoice;

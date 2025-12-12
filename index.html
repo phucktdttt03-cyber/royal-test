@@ -3,9 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Royal English - Mock Exams</title>
+    <title>Royal English - Online Mock Exams</title>
+    <meta name="description" content="Free Cambridge English mock exams for Starters, Movers, and Flyers levels. Instant grading and vocabulary practice." />
+    
+    <!-- Tailwind CSS (CDN is fine for simplicity here) -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Fredoka for a friendly, childish look -->
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind Config -->
     <script>
       tailwind.config = {
         theme: {
@@ -15,35 +22,56 @@
             },
             colors: {
               royal: {
-                green: '#39ff14', // Neon green from logo
+                green: '#39ff14',
                 dark: '#1a1a1a',
                 light: '#f0fdf4',
               }
+            },
+            animation: {
+              'bounce-slow': 'bounce 3s infinite',
             }
           }
         }
       }
     </script>
+    
     <style>
       body {
-        background-color: #f3f4f6;
+        background-color: #f8fafc; /* Slightly lighter for desktop */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
-      .royal-gradient {
-        background: linear-gradient(135deg, #39ff14 0%, #2ecc71 100%);
+
+      /* Custom Scrollbar for Webkit (Chrome, Edge, Safari) */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1; 
+        border-radius: 5px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8; 
       }
     </style>
   <script type="importmap">
 {
   "imports": {
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "@google/genai": "https://esm.sh/@google/genai@^1.33.0",
     "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3"
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "vite": "https://esm.sh/vite@^7.2.7",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
   }
 }
 </script>
 </head>
   <body>
     <div id="root"></div>
+    <!-- Entry point for Vite -->
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>

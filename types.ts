@@ -24,4 +24,4 @@ export interface QuizState {
   timeTaken: number; // in seconds
 }
 
-export type AppStatus = 'idle' | 'menu' | 'loading_exam' | 'exam' | 'results' | 'loading_topics' | 'topics' | 'loading_vocab' | 'vocab' | 'error';
+export type AppStatus = 'idle' | 'menu' | 'exam_selection' | 'loading_exam' | 'exam' | 'results' | 'loading_topics' | 'topics' | 'loading_vocab' | 'vocab' | 'error';
